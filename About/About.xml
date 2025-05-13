@@ -7,6 +7,8 @@
 Allows your saves to load if they contain things that were in a removed mod.
 [h2][b]Warning: The items from removed mods will still be removed from your game, it just won't crash when loading.[/b][/h2]
 
+[url=https://github.com/tsholmes/StationeersSaveRecovery]Source on Github[/url]
+
 This requires BepInEx and a modloader installed. Try out [url=https://github.com/StationeersLaunchPad/StationeersLaunchPad]StationeersLaunchPad[/url]. (also compatible with StationeersMods)
   </Description>
   <ChangeLog>
