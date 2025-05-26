@@ -9,22 +9,20 @@ using System.Xml;
 using Assets.Scripts.Objects;
 using Assets.Scripts.Serialization;
 using Assets.Scripts.Util;
-using BepInEx.Configuration;
 using HarmonyLib;
-using Networking.Servers;
 using StationeersMods.Interface;
 using UnityEngine;
 
 namespace SaveRecovery
 {
-  [StationeersMod("SaveRecovery", "SaveRecovery", "0.1.0")]
+  [StationeersMod("SaveRecovery", "SaveRecovery", "0.1.1")]
   class SaveRecovery : ModBehaviour
   {
     public override void OnLoaded(ContentHandler contentHandler)
     {
       base.OnLoaded(contentHandler);
 
-      var harmony = new Harmony("Impersonate");
+      var harmony = new Harmony("SaveRecovery");
       harmony.PatchAll();
     }
   }
@@ -33,7 +31,7 @@ namespace SaveRecovery
   static class XmlSaveLoadPatch
   {
     [HarmonyPatch("LoadWorld"), HarmonyPrefix]
-    static void LoadWorld(string path, bool loadWithoutChars = false)
+    static void LoadWorld()
     {
       var existingTypes = new HashSet<string>();
       foreach (var type in XmlSaveLoad.ExtraTypes)
@@ -86,16 +84,16 @@ namespace SaveRecovery
     }
 
     private static HashSet<long> _failedThings = new();
-    [HarmonyPatch(nameof(XmlSaveLoad.LoadThing)), HarmonyPrefix]
-    static void LoadThingPrefix(ThingSaveData thingData, bool generatesTerrain)
+    [HarmonyPatch("LoadThing"), HarmonyPrefix]
+    static void LoadThingPrefix(ThingSaveData thingData)
     {
       // If the parent failed to load, drop this in the world
       if (thingData is DynamicThingSaveData dynamicData && _failedThings.Contains(dynamicData.ParentReferenceId))
         dynamicData.ParentReferenceId = 0;
     }
 
-    [HarmonyPatch(nameof(XmlSaveLoad.LoadThing)), HarmonyPostfix]
-    static void LoadThingPostfix(ThingSaveData thingData, bool generatesTerrain, ref Thing __result)
+    [HarmonyPatch("LoadThing"), HarmonyPostfix]
+    static void LoadThingPostfix(ThingSaveData thingData, ref Thing __result)
     {
       // If this thing didn't load for whatever reason, save its ID so any children aren't waiting for it
       if (__result == null)

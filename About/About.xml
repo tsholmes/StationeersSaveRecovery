@@ -2,7 +2,7 @@
 <ModMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>Save Recovery</Name>
   <Author>tom_is_unlucky</Author>
-  <Version>0.1.0</Version>
+  <Version>0.1.1</Version>
   <Description>[h1]Save Recovery[/h1]
 Allows your saves to load if they contain things that were in a removed mod.
 [h2][b]Warning: The items from removed mods will still be removed from your game, it just won't crash when loading.[/b][/h2]
@@ -12,9 +12,9 @@ Allows your saves to load if they contain things that were in a removed mod.
 This requires BepInEx and a modloader installed. Try out [url=https://github.com/StationeersLaunchPad/StationeersLaunchPad]StationeersLaunchPad[/url]. (also compatible with StationeersMods)
   </Description>
   <ChangeLog>
-    [h3]Version 0.1.0:[/h3]
+    [h3]Version 0.1.1:[/h3]
     [list]
-    [*]Initial release
+    [*]Fix for beta
     [/list]
   </ChangeLog>
   <Tags></Tags>
