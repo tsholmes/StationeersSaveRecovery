@@ -21,4 +21,5 @@ This requires BepInEx and a modloader installed. Try out [url=https://github.com
   <Dependencies />
   <LoadBefore />
   <LoadAfter />
+  <WorkshopHandle>3480696797</WorkshopHandle>
 </ModMetadata>
